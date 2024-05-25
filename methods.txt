@@ -1,0 +1,40 @@
+
+React Three Rapier - Rigid Body Methods 
+
+O método de adição de força nos permitirá adicionar a força no centro do corpo rígido e o método add force geralmente é usado para simular uma força ininterrupta, como o vento nos jogos. 
+
+const PhysicsScene = () => {
+
+  const cubeRef = useRef();
+
+  const cubeClickHandler = () => {
+    cubeRef.current.addForce({ x: 0, y:0, z:10 });
+  }
+
+
+  return (
+    <>
+
+      <Physics>
+        <RigidBody ref={cubeRef} onClick={cubeClickHandler} >
+          <mesh castShadow position={[1.5, 2.5, 0]}>
+            <boxGeometry />
+            <meshStandardMaterial color="#0083e6" />
+          </mesh>
+        </RigidBody>
+);
+}
+
+O próximo método é a aplicação de impulso, o impulso de aplicação é usado para aplicar uma força por um curto período de tempo.Para aplicar um impulso em um determinado ponto, precisamos usar aplicar impulso no ponto.
+cubeRef.current.applyImpulse({ x: 2, y: 8, z: 0 });
+
+
+Para aplicar um impulso em um determinado ponto primeiro fornecemos o vetor de impulso e quero empurrar o cubo para cima. cubeRef.current.applyImpulseAtPoint(
+{ x: 0, y: 8, z: 0 }, Em seguida, fornecemos o ponto onde o impulso será aplicado. { x: 2, y: 0, z: 0 } );
+
+
+O método add talk é semelhante ao método add force, mas fará o cubo girar em vez de movendo-o.
+
+Se quisermos que o primeiro cubo caia mais lentamente que o segundo cubo, então temos que diminuir o primeiro cubo: gravityScale={0.25}
+
+
